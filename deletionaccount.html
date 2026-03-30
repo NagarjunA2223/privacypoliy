@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Account Deletion instructions for Physio Therapist mobile application by SIMATS.">
+    <title>Delete Account - Physio Therapist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            line-height: 1.7;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 40%, #b91c1c 100%);
+            padding: 60px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .app-name {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+        }
+
+        .hero .icon-top {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: -30px auto 40px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(185, 28, 28, 0.1));
+            border: 1px solid rgba(239, 68, 68, 0.4);
+            border-radius: 12px;
+            padding: 20px 24px;
+            text-align: center;
+            margin-bottom: 24px;
+            color: #fca5a5;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .warning-banner .warn-icon {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(239, 68, 68, 0.12);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .section:hover {
+            border-color: rgba(239, 68, 68, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .section h2 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #fca5a5;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2 .icon {
+            font-size: 1.4rem;
+        }
+
+        .section p, .section li {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .section ul, .section ol {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .section ul li, .section ol li {
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .section ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #ef4444;
+            font-weight: 600;
+        }
+
+        .steps-list {
+            counter-reset: step-counter;
+        }
+
+        .steps-list li {
+            counter-increment: step-counter;
+            padding-left: 44px !important;
+            position: relative;
+            margin-bottom: 16px !important;
+        }
+
+        .steps-list li::before {
+            content: counter(step-counter) !important;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .data-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(239, 68, 68, 0.15);
+            border-radius: 10px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: #cbd5e1;
+        }
+
+        .data-item.deleted {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .data-item.retained {
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        .data-item .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .data-item.deleted .dot { background: #ef4444; }
+        .data-item.retained .dot { background: #eab308; }
+
+        .legend {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 14px;
+            font-size: 0.85rem;
+        }
+
+        .legend span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #94a3b8;
+        }
+
+        .legend .dot-sm {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .legend .dot-red { background: #ef4444; }
+        .legend .dot-yellow { background: #eab308; }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(185, 28, 28, 0.08));
+            border: 1px solid rgba(239, 68, 68, 0.25);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 8px;
+        }
+
+        .contact-card a {
+            color: #fca5a5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .contact-card a:hover {
+            color: #fecaca;
+            text-decoration: underline;
+        }
+
+        .timeline {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-top: 12px;
+            border-left: 3px solid #ef4444;
+        }
+
+        .timeline p {
+            margin-bottom: 6px !important;
+            font-size: 0.9rem;
+        }
+
+        .timeline strong {
+            color: #fca5a5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px 40px;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(239, 68, 68, 0.1);
+        }
+
+        footer a {
+            color: #fca5a5;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .section { padding: 24px 20px; }
+            .container { padding: 0 14px; }
+            .data-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <span class="icon-top">🗑️</span>
+        <h1>Delete Account</h1>
+        <p class="app-name">Physio Therapist — by SIMATS</p>
+    </div>
+
+    <div class="container">
+
+        <div class="warning-banner">
+            <span class="warn-icon">⚠️</span>
+            Account deletion is permanent. All your data will be removed and cannot be recovered.
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">📖</span> Overview</h2>
+            <p>
+                You have the right to delete your <strong>Physio Therapist</strong> account at any time. 
+                Once your account is deleted, all personal data associated with your account will be 
+                permanently removed from our servers within 30 days.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">📝</span> How to Delete Your Account</h2>
+            <p>You can delete your account using either of the following methods:</p>
+
+            <h3 style="color: #fca5a5; font-size: 1.05rem; margin: 20px 0 14px; font-weight: 600;">Method 1: From the App</h3>
+            <ol class="steps-list">
+                <li>Open the <strong>Physio Therapist</strong> app on your device.</li>
+                <li>Navigate to <strong>Settings</strong> from the bottom navigation or side menu.</li>
+                <li>Tap on <strong>"Account"</strong> or <strong>"Profile Settings"</strong>.</li>
+                <li>Scroll down and tap <strong>"Delete Account"</strong>.</li>
+                <li>Confirm your identity by entering your password.</li>
+                <li>Tap <strong>"Confirm Delete"</strong> to permanently delete your account.</li>
+            </ol>
+
+            <h3 style="color: #fca5a5; font-size: 1.05rem; margin: 20px 0 14px; font-weight: 600;">Method 2: Via Email</h3>
+            <p>
+                Send an email to <a href="mailto:mahendrakandu@gmail.com" style="color: #fca5a5; text-decoration: none; font-weight: 500;">mahendrakandu@gmail.com</a> 
+                with the subject line <strong>"Account Deletion Request"</strong>. Include the email address 
+                associated with your account. We will process your request within <strong>7 business days</strong>.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">📊</span> Data That Gets Deleted vs. Retained</h2>
+            <p>Upon account deletion, the following data will be handled as described:</p>
+
+            <div class="legend">
+                <span><span class="dot-sm dot-red"></span> Permanently Deleted</span>
+                <span><span class="dot-sm dot-yellow"></span> Retained (Legal/Business)</span>
+            </div>
+
+            <div class="data-grid">
+                <div class="data-item deleted">
+                    <span class="dot"></span> Profile Information
+                </div>
+                <div class="data-item deleted">
+                    <span class="dot"></span> Health & Treatment Data
+                </div>
+                <div class="data-item deleted">
+                    <span class="dot"></span> In-App Messages
+                </div>
+                <div class="data-item deleted">
+                    <span class="dot"></span> Exercise & Progress Records
+                </div>
+                <div class="data-item deleted">
+                    <span class="dot"></span> Appointment History
+                </div>
+                <div class="data-item deleted">
+                    <span class="dot"></span> Location Preferences
+                </div>
+                <div class="data-item retained">
+                    <span class="dot"></span> Payment Transactions*
+                </div>
+                <div class="data-item retained">
+                    <span class="dot"></span> Legal Compliance Data*
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-top: 12px;">
+                * Payment transaction records and legal compliance data may be retained for up to 5 years 
+                as required by applicable financial and tax regulations.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">⏱️</span> Deletion Timeline</h2>
+            <div class="timeline">
+                <p><strong>Immediately:</strong> Your account is deactivated and you are logged out.</p>
+                <p><strong>Within 24 hours:</strong> Your profile becomes invisible to other users.</p>
+                <p><strong>Within 7 days:</strong> Active data begins purging from primary systems.</p>
+                <p style="margin-bottom: 0;"><strong>Within 30 days:</strong> All personal data is permanently removed from backups.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">🔄</span> Before You Delete</h2>
+            <p>Please consider the following before proceeding:</p>
+            <ul>
+                <li>All your treatment history, exercise records, and progress data will be <strong>permanently lost</strong>.</li>
+                <li>Any active appointments will be <strong>automatically cancelled</strong>.</li>
+                <li>You will not be able to recover your account or data after deletion.</li>
+                <li>If you have any pending payments or refunds, please resolve them before deleting your account.</li>
+                <li>You can create a new account with the same email address after deletion, but previous data will not be restored.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">📬</span> Need Help?</h2>
+            <p>If you have questions about account deletion or need assistance, contact us:</p>
+            <div class="contact-card">
+                <p>📧 Email: <a href="mailto:mahendrakandu@gmail.com">mahendrakandu@gmail.com</a></p>
+                <p>📱 App: <strong>Physio Therapist</strong></p>
+                <p style="margin-bottom:0;">🏢 Developer: <strong>SIMATS</strong></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Physio Therapist — SIMATS. All rights reserved.</p>
+        <p style="margin-top: 6px;"><a href="privacypolicy.html">Privacy Policy</a></p>
+    </footer>
+
+</body>
+</html>
